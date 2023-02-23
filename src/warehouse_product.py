@@ -38,16 +38,15 @@ class WarehouseProduct():
 		self.apply(event)
 		self._events.append(event)
 
-	# youtube video has 3 different apply methods, one for each event type 
+	# youtube video has 3 different apply methods, one for each event type
 	def apply(self, event: Event) -> None:
-		if type(event) == ProductShipped:
-			self._current_state.quantity_on_hand -= event.quantity
-		
-		if type(event) == ProductReceived:
-			self._current_state.quantity_on_hand += event.quantity
-		
-		if type(event) == InventoryAdjusted:
-			self._current_state.quantity_on_hand += event.quantity
+		match event:
+			case ProductShipped(event):
+				self._current_state.quantity_on_hand -= event.quantity
+			case ProductReceived(event):
+				self._current_state.quantity_on_hand += event.quantity
+			case InventoryAdjusted(event):
+				self._current_state.quantity_on_hand += event.quantity
 
 	def get_quantity_on_hand(self) -> int:
 		return self._current_state.quantity_on_hand
