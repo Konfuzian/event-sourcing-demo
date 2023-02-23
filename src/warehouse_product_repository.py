@@ -4,6 +4,7 @@ class WarehouseProductRepository():
 	# this keeps track of all the events on a per-sku basis
 	_in_memory_streams = {}
 
+	# whenever we get a product from the repository, we create a new WarehouseProduct and replay all the events
 	def get(self, sku: str) -> WarehouseProduct:
 		warehouse_product = WarehouseProduct(sku)
 
@@ -13,5 +14,6 @@ class WarehouseProductRepository():
 
 		return warehouse_product
 
+	# saving a product updates self._in_memory_streams with the current events for the product 
 	def save(self, warehouse_product: WarehouseProduct):
 		self._in_memory_streams[warehouse_product.sku] = warehouse_product.get_events()

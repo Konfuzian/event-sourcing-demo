@@ -35,13 +35,7 @@ class WarehouseProduct():
 		return self._events
 
 	def add_event(self, event):
-		# polymorphicall call the right apply method:
-		# ProductShipped -> self.apply(ProductShipped event)
-		# ProductReceived -> self.apply(ProductReceived event)
-		# InventoryAdjusted -> self.apply(InventoryAdjusted event)
-		# other: throw an exception
 		self.apply(event)
-
 		self._events.append(event)
 
 	# youtube video has 3 different apply methods, one for each event type 
