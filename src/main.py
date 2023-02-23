@@ -1,5 +1,4 @@
 from warehouse_product_repository import WarehouseProductRepository
-from events import ProductReceived, ProductShipped, InventoryAdjusted
 
 class Quantity():
 	def __init__(self, quantity: int):
@@ -60,17 +59,10 @@ while (key != "X"):
 		case "E":
 			print("{sku} events:")
 			for event in warehouse_product.get_events():
-				if type(event) == ProductShipped:
-					print(f"{event.datetime} | sku {sku} shipped: {event.quantity}")
-				
-				if type(event) == ProductReceived:
-					print(f"{event.datetime} | sku {sku} received: {event.quantity}")
-				
-				if type(event) == InventoryAdjusted:
-					print(f"{event.datetime} | sku {sku} adjusted: {event.quantity} ({event.reason})")
+				print(event)
 	
 	warehouse_product_repository.save(warehouse_product)
-	print(warehouse_product)
+	print(f"\n{warehouse_product}")
 	input()
 
 	print("R: Receive Inventory")

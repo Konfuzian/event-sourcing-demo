@@ -1,6 +1,7 @@
 from warehouse_product import WarehouseProduct
 
 class WarehouseProductRepository():
+	# this keeps track of all the events on a per-sku basis
 	_in_memory_streams = {}
 
 	def get(self, sku: str) -> WarehouseProduct:
