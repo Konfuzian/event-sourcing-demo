@@ -41,11 +41,11 @@ class WarehouseProduct():
 	# youtube video has 3 different apply methods, one for each event type
 	def apply(self, event: Event) -> None:
 		match event:
-			case ProductShipped(event):
+			case ProductShipped():
 				self._current_state.quantity_on_hand -= event.quantity
-			case ProductReceived(event):
+			case ProductReceived():
 				self._current_state.quantity_on_hand += event.quantity
-			case InventoryAdjusted(event):
+			case InventoryAdjusted():
 				self._current_state.quantity_on_hand += event.quantity
 
 	def get_quantity_on_hand(self) -> int:

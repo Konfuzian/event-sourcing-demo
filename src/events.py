@@ -1,5 +1,6 @@
 # TODO: try with protocols instead of classes
 from datetime import datetime
+from typing import Protocol
 
 class Event:
     pass
@@ -10,7 +11,7 @@ class ProductShipped(Event):
         self.quantity = quantity
         self.datetime = datetime
     
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.datetime} | sku {self.sku} shipped: {self.quantity}"
 
 class ProductReceived(Event):
@@ -19,7 +20,7 @@ class ProductReceived(Event):
         self.quantity = quantity
         self.datetime = datetime
     
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.datetime} | sku {self.sku} received: {self.quantity}"
 
 class InventoryAdjusted(Event):
@@ -29,5 +30,5 @@ class InventoryAdjusted(Event):
         self.reason = reason
         self.datetime = datetime
     
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.datetime} | sku {self.sku} received: {self.quantity} ({self.reason})"
