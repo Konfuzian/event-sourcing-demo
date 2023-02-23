@@ -1,8 +1,7 @@
-# TODO: try with protocols instead of classes
 from datetime import datetime
 from typing import Protocol
 
-class Event:
+class Event(Protocol):
     pass
 
 class ProductShipped(Event):
