@@ -1,21 +1,20 @@
 from warehouse_product_repository import WarehouseProductRepository
 
-def get_quantity():
-	return int(input("Enter quantity: "))
 
-def get_adjustment_reason():
-	return input("Enter reason: ")
+def print_available_commands() -> None:
+	print()
+	print("R: Receive Inventory")
+	print("S: Ship Inventory")
+	print("A: Adjust Inventory")
+	print("Q: Quantity On Hand")
+	print("E: Events")
+	print("X: Exit")
+	print()
 
 
 warehouse_product_repository = WarehouseProductRepository()
 
-print("R: Receive Inventory")
-print("S: Ship Inventory")
-print("A: Adjust Inventory")
-print("Q: Quantity On Hand")
-print("E: Events")
-print("X: Exit")
-
+print_available_commands()
 key = input("> ").upper()
 while (key != "X"):
 	sku = input("Enter sku: ")
@@ -25,21 +24,21 @@ while (key != "X"):
 		case "R":
 			quantity = int(input("Enter quantity: "))
 			warehouse_product.receive_product(quantity)
-			print(f"{sku} received: {quantity}")
+			print(f"sku {sku} received: {quantity}")
 
 		case "S":
 			quantity = int(input("Enter quantity: "))
 			warehouse_product.ship_product(quantity)
-			print(f"{sku} shipped: {quantity}")
+			print(f"sku {sku} shipped: {quantity}")
 
 		case "A":
 			quantity = int(input("Enter quantity: "))
 			reason = input("Enter reason: ")
 			warehouse_product.adjust_inventory(quantity, reason)
-			print(f"{sku} adjusted: {quantity} ({reason})")
+			print(f"sku {sku} adjusted: {quantity} ({reason})")
 
 		case "Q":
-			print(f"{sku} quantity on hand: {warehouse_product.get_quantity_on_hand()}")
+			print(f"sku {sku} quantity on hand: {warehouse_product.get_quantity_on_hand()}")
 
 		case "E":
 			print("{sku} events:")
@@ -47,15 +46,6 @@ while (key != "X"):
 				print(event)
 	
 	warehouse_product_repository.save(warehouse_product)
-	print(f"\n{warehouse_product}")
-	input()
-
-	print("R: Receive Inventory")
-	print("S: Ship Inventory")
-	print("A: Adjust Inventory")
-	print("Q: Quantity On Hand")
-	print("E: Events")
-	print("X: Exit")
-
+	input(f"\n{warehouse_product}")  # print current state and wait for a keystroke
+	print_available_commands()
 	key = input("> ").upper()
-	print()
